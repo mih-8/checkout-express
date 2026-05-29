@@ -1,5 +1,6 @@
+// Função que o professor pediu pra fazer
 function calcularCompra() {
-    // 1. Coleta os dados que o usuário digitou na tela
+    // 1. Pegando o que o usuário digitou
     const valorElemento = document.getElementById("valorProduto");
     const cupomElemento = document.getElementById("cupomTexto");
     const painel = document.getElementById("painelResultado");
@@ -7,60 +8,34 @@ function calcularCompra() {
     let valorOriginal = Number(valorElemento.value);
     let cupomDigitado = cupomElemento.value;
 
-    // =================================================================
-    // Complete os códigos a seguir com o que é pedido
-    // =================================================================
-
-    
     // REGRA 1: Validação do Cupom de Desconto
-    //O nome do cupom oficial é "PROMO10". 
-    // Use .toUpperCase() para garantir que funcione se o usuário digitar "promo10" ou "Promo10"
-    
-    // Faça um teste condicional (if): se o 'cupomDigitado' for igual ao cupom oficial o valor de desconto será = a 10
-     
-    // DICA: Use a estrutura -> if (variavel.toUpperCase() === "VALOR") { valor da vaiável desconto}
-    
+    // Se o cupom for PROMO10 ganha 10 de desconto
     let desconto = 0;
-    
-
+    if (cupomDigitado.toUpperCase() === "PROMO10") {
+        desconto = 10;
+    }
 
     // REGRA 2: Aplicação do Desconto no Valor do Produto
+    // Aqui eu tiro o desconto do valor original
+    let valorComDesconto = valorOriginal - desconto;
 
-    // Crie uma nova variável chamada 'valorComDesconto'.
-    // Ela deve guardar o resultado de uma conta matemática simples:
-    // O 'valorOriginal' do produto MENOS (-) o 'desconto' que você descobriu na Regra 1.
-    
-    // ESCREVA SEU CÓDIGO AQUI:
-
-
-  
     // REGRA 3: Cálculo da Taxa de Frete
-   
-    // Agora crie uma estrutura condicional completa (if / else):
-    // -> SE o 'valorComDesconto' for MAIOR OU IGUAL (>=) a 100, o frete continua 0.
-    // -> SENÃO (else), a variável 'frete' deve receber o valor de 15.
-    //
-    // DICA: Use a estrutura -> if ( ... ) { ... } else { ... }
+    // Se o valor com desconto for 100 ou mais o frete é grátis
+    // Se não for, cobra 15 reais
     let frete = 0;
-    
-    // ESCREVA SEU IF / ELSE AQUI:
+    if (valorComDesconto >= 100) {
+        frete = 0;
+    } else {
+        frete = 15;
+    }
 
-
-   
     // REGRA 4: Total Geral da Compra
-    // -----------------------------------------------------------------
-    // Crie a última variável chamada 'totalFinal'.
-    // Ela deve guardar a soma (+) do 'valorComDesconto' com a taxa do 'frete'.
-    
-    // ESCREVA SEU CÓDIGO AQUI:
+    // Soma o valor com desconto mais o frete
+    let totalFinal = valorComDesconto + frete;
 
-
-    // =================================================================
-    //  SEU CÓDIGO TERMINA AQUI 
-    // =================================================================
-
-    // 2. Exibe o resultado final de volta na tela do usuário
-    painel.className = "resultado sucesso";
+    // 2. Mostrando o resultado na tela
+    painel.style.background = "#e8f5e9";
+    painel.style.borderLeft = "4px solid green";
     painel.innerHTML = `
         <strong>Resumo do Pedido:</strong><br>
         Desconto: R$ ${desconto.toFixed(2)}<br>
